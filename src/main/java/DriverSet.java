@@ -4,16 +4,19 @@ import org.openqa.selenium.chrome.ChromeDriver;
 public class DriverSet {
     private static WebDriver driver;
     
-    private static void createWebDriver() {        
+    private static WebDriver createWebDriver() {
         if (driver != null) {
             DriverSet driverSet = new DriverSet();
-            driverSet.getDriver();
+            return driverSet.getDriver();
         } else {
-            driver = new ChromeDriver();
+            return driver = new ChromeDriver();
         }
     }
 
     public WebDriver getDriver() {
+        if (driver == null) {
+            driver = createWebDriver();
+        }
         return driver;
     }
 }
