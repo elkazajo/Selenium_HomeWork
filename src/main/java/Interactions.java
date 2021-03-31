@@ -5,7 +5,6 @@ import org.openqa.selenium.support.ui.Select;
 
 public class Interactions {
     private final WebDriver driver;
-    private final By dropdown = By.id("postform-expiration");
 
     public Interactions(WebDriver driver) {
         this.driver = driver;
@@ -20,8 +19,8 @@ public class Interactions {
     }
 
     public void dropdownMenu() {
-        WebElement element = driver.findElement(dropdown);
-        Select select = new Select(element);
-        select.selectByIndex(2);
+        clickElement("//*[@id=\"select2-postform-expiration-container\"]");
+        WaitUtility.waitForPresenceOfElement("//li[text()=\"10 Minutes\"]");
+        clickElement("//li[text()=\"10 Minutes\"]");
     }
 }

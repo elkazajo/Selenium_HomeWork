@@ -12,4 +12,9 @@ public class DriverSet {
         }
         return driver;
     }
+
+    public static void shutDownDriver() throws InterruptedException {
+        Thread.sleep(5000);
+        driver.quit();
+    }
 }
