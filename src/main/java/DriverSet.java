@@ -3,20 +3,17 @@ import org.openqa.selenium.chrome.ChromeDriver;
 
 public class DriverSet {
     private static WebDriver driver;
-    
-    private static WebDriver createWebDriver() {
-        if (driver != null) {
-            DriverSet driverSet = new DriverSet();
-            return driverSet.getDriver();
-        } else {
-            return driver = new ChromeDriver();
-        }
-    }
 
-    public WebDriver getDriver() {
+    public static WebDriver getDriver() {
         if (driver == null) {
-            driver = createWebDriver();
+            System.setProperty("webdriver.chrome.driver", "src/main/resources/chromedriver.exe");
+            driver = new ChromeDriver();
         }
         return driver;
+    }
+
+    public static void shutDownDriver() throws InterruptedException {
+        Thread.sleep(5000);
+        driver.quit();
     }
 }
