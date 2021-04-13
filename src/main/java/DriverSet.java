@@ -1,10 +1,11 @@
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.testng.annotations.AfterTest;
 
 public class DriverSet {
-    private static WebDriver driver;
+    private WebDriver driver;
 
-    public static WebDriver getDriver() {
+    public WebDriver getDriver() {
         if (driver == null) {
             System.setProperty("webdriver.chrome.driver", "src/main/resources/chromedriver.exe");
             driver = new ChromeDriver();
@@ -12,8 +13,9 @@ public class DriverSet {
         return driver;
     }
 
-    public static void shutDownDriver() throws InterruptedException {
-        Thread.sleep(5000);
+    @AfterTest
+    public void shutDownDriver() {
         driver.quit();
+        driver = null;
     }
 }

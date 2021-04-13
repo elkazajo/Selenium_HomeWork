@@ -1,27 +1,19 @@
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.ui.Select;
+import org.testng.annotations.Test;
+import org.testng.asserts.SoftAssert;
 
 public class MainTests {
-    public static void main(String[] args) throws InterruptedException {
-        WebDriver driver = DriverSet.getDriver();
+
+    @Test
+    public void test() {
+        DriverSet driverSet = new DriverSet();
+        WebDriver driver = driverSet.getDriver();
         driver.get("https://pastebin.com/");
 
-        String newPasteId = "postform-text";
-        String newPasteText = "Hello from WebDriver";
-        String pasteNameTitleId = "postform-name";
-        String pasteNameTitleText = "helloweb";
-        String createNewPasteButton = "//*[@class=\"btn -big\"]";
+        PastePage pastePage = new PastePage(driver);
+        pastePage.inputNewPasteText().inputPasteName().dropdownMenu().clickCreateNewPasteButton();
 
-        Interactions interactions = new Interactions(driver);
-
-        interactions.inputText(newPasteId, newPasteText);
-        interactions.inputText(pasteNameTitleId, pasteNameTitleText);
-
-        interactions.dropdownMenu();
-        interactions.clickElement(createNewPasteButton);
-
-        DriverSet.shutDownDriver();
+        SoftAssert softAssert = new SoftAssert();
+        softAssert.assertAll();
     }
 }
